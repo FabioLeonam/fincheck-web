@@ -24,15 +24,14 @@ export function Login() {
           type="email"
           placeholder="E-mail"
           {...register('email')}
-          error="Informe o e-mail"
+          error={errors.email?.message}
         />
-        {errors.email && <span  >{errors.email.message}</span>}
         <Input
           type="password"
           placeholder="Senha"
+          error={errors.password?.message}
           {...register('password')}
         />
-        {errors.password && <span>{errors.password.message}</span>}
 
         <Button className="mt-2" type="submit">Entrar</Button>
       </form>
