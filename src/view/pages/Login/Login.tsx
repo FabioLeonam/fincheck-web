@@ -4,7 +4,7 @@ import { Button } from "../../components/Button";
 import { useLoginController } from "./useLoginController";
 
 export function Login() {
-  const { handleSubmit, register, errors } = useLoginController()
+  const { handleSubmit, register, errors, isLoading } = useLoginController()
   return (
     <>
       <header className="flex flex-col gap-4 items-center">
@@ -33,7 +33,7 @@ export function Login() {
           {...register('password')}
         />
 
-        <Button className="mt-2" type="submit">Entrar</Button>
+        <Button className="mt-2" type="submit" isLoading={isLoading}>Entrar</Button>
       </form>
     </>
   )
