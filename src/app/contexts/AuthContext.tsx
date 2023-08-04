@@ -9,7 +9,7 @@ export const AuthContext = createContext<AuthContextValue>({} as AuthContextValu
 
 export function AuthProvider({children}: { children: React.ReactNode}) {
   return(
-    <AuthContext.Provider value={{ signedIn: false }}>
+    <AuthContext.Provider value={{ signedIn: true }}>
       {children}
     </AuthContext.Provider>
   )
