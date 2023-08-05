@@ -1,11 +1,14 @@
-import { EyeIcon } from "../../../components/icons/EyeIcon";
+import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AccountCard } from "./AccountCard";
 import 'swiper/css';
 import { AccountsSliderNavigation } from "./AccountsSliderNavigation";
+import { useAccountController } from "./useAccountsController";
 
 
 export function Accounts(){
+
+  const { sliderState, setSliderState } = useAccountController();
   return (
     <div className="bg-teal-900 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
       <div>
@@ -26,12 +29,19 @@ export function Accounts(){
         <Swiper
           spaceBetween={16}
           slidesPerView={2.1}
+          onSlideChange={swiper => {
+            setSliderState({
+              isBeginning: swiper.isBeginning,
+              isEnd: swiper.isEnd,
+            })
+
+          }}
         >
           <div className="flex item-center justify-between mb-4" slot="container-start">
             <strong className="text-white tracking-[-1px] text-lg">
               Minhas contas
             </strong>
-            <AccountsSliderNavigation />
+            <AccountsSliderNavigation  isBeginning={sliderState.isBeginning} isEnd={sliderState.isEnd} />
           </div>
             <SwiperSlide>
               <AccountCard color="#7950F2" name="Nubank" balance={1000.23} type="CHECKING"/>
