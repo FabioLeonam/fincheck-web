@@ -2,7 +2,7 @@ import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AccountCard } from "./AccountCard";
 import 'swiper/css';
-import { AccountsSliderNavigation } from "./AccountsSliderNavigation";
+import { SliderNavigation } from "./SliderNavigation";
 import { useAccountController } from "./useAccountsController";
 
 
@@ -41,7 +41,7 @@ export function Accounts(){
             <strong className="text-white tracking-[-1px] text-lg">
               Minhas contas
             </strong>
-            <AccountsSliderNavigation  isBeginning={sliderState.isBeginning} isEnd={sliderState.isEnd} />
+            <SliderNavigation  isBeginning={sliderState.isBeginning} isEnd={sliderState.isEnd} />
           </div>
             <SwiperSlide>
               <AccountCard color="#7950F2" name="Nubank" balance={1000.23} type="CHECKING"/>
