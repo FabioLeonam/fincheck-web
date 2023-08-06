@@ -10,9 +10,10 @@ import { CategoryIcon } from "../../../../components/icons/categories/CategoryIc
 import { cn } from "../../../../../app/utils/cn";
 import { useTransactionController } from "./useTransactionsController";
 import { Spinner } from "../../../../components/Spinner";
+import emptyStateImage from '../../../../../assets/empty-state.svg';
 
 export function Transactions(){
-  const { areValuesVisible, isLoading } = useTransactionController();
+  const { areValuesVisible, isLoading, transactions } = useTransactionController();
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
      {isLoading && (
@@ -53,37 +54,47 @@ export function Transactions(){
         </header>
 
         <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-          <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-            <div className="flex-1 flex items-center gap-3">
-              <CategoryIcon type="expense"/>
-
-              <div>
-                <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
-                <span className="text-sm text-gray-600">04/06/2023</span>
-              </div>
+          {transactions.length === 0 && (
+            <div className="flex flex-col items-center justify-center h-full">
+              <img src={emptyStateImage} alt="Empty state" />
+              <p className="text-gray-700">Não encontramos nenhuma transação!</p>
             </div>
+          )}
+          {transactions.length > 0 && (
+            <>
+              <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                <div className="flex-1 flex items-center gap-3">
+                  <CategoryIcon type="expense"/>
 
-            <span className={cn(
-              "text-red-800 font-medium tracking-[-0.5px]",
-              !areValuesVisible && 'blur-sm'
-            )}>-{formatCurrency(123.05)}</span>
-          </div>
+                  <div>
+                    <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
+                    <span className="text-sm text-gray-600">04/06/2023</span>
+                  </div>
+                </div>
 
-          <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-            <div className="flex-1 flex items-center gap-3">
-              <CategoryIcon type="income"/>
-
-              <div>
-                <strong className="font-bold tracking-[-0.5px] block">Bônus</strong>
-                <span className="text-sm text-gray-600">04/06/2023</span>
+                <span className={cn(
+                  "text-red-800 font-medium tracking-[-0.5px]",
+                  !areValuesVisible && 'blur-sm'
+                )}>-{formatCurrency(123.05)}</span>
               </div>
-            </div>
 
-            <span className={cn(
-              "text-green-800 font-medium tracking-[-0.5px]",
-              !areValuesVisible && 'blur-sm'
-            )}>{formatCurrency(500)}</span>
-          </div>
+              <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                <div className="flex-1 flex items-center gap-3">
+                  <CategoryIcon type="income"/>
+
+                  <div>
+                    <strong className="font-bold tracking-[-0.5px] block">Bônus</strong>
+                    <span className="text-sm text-gray-600">04/06/2023</span>
+                  </div>
+                </div>
+
+                <span className={cn(
+                  "text-green-800 font-medium tracking-[-0.5px]",
+                  !areValuesVisible && 'blur-sm'
+                )}>{formatCurrency(500)}</span>
+              </div>
+            </>
+          ) }
         </div>
       </>
      )}
