@@ -4,8 +4,8 @@ import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { SigninParams } from '../../../app/services/authService/signin';
-import { authService } from '../../../app/services/authService/authService';
 import { useAuth } from '../../../app/hooks/useAuth';
+  import { authService } from '../../../app/services/authService';
 
 const schema = z.object({
   email: z.string().nonempty('E-mail é obrigatório').email('Informe um e-mail válido'),

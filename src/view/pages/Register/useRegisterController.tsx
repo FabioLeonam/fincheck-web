@@ -4,7 +4,7 @@ import { z } from "zod";
 import { toast } from "react-hot-toast";
 
 import { useMutation } from '@tanstack/react-query';
-import { authService } from "../../../app/services/authService/authService";
+import { authService } from "../../../app/services/authService";
 import { SignupParams } from "../../../app/services/authService/signup";
 import { useAuth } from "../../../app/hooks/useAuth";
 
