@@ -1,7 +1,6 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import { DropdownMenu } from "../../../../components/DropdownMenu";
-import { NewAccount } from "../../../../components/icons/NewAccount";
-import { Income } from "../../../../components/icons/categories/income/Income";
+import { NewAccountIcon } from "../../../../components/icons/NewAccountIcon";
 import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
 
 export function Fab(){
@@ -25,7 +24,7 @@ export function Fab(){
           </DropdownMenu.Item>
 
           <DropdownMenu.Item className="gap-2">
-            <NewAccount />
+            <NewAccountIcon />
             Nova conta
           </DropdownMenu.Item>
         </DropdownMenu.Content>
