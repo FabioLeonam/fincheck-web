@@ -10,7 +10,7 @@ import { useTransactionController } from "./useTransactionsController";
 import { Spinner } from "../../../../components/Spinner";
 import emptyStateImage from '../../../../../assets/empty-state.svg';
 import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
-import { FiltersModal } from "./FiltersModal";
+import { FiltersModal } from "./FiltersModal/FiltersModal";
 
 export function Transactions(){
   const {
