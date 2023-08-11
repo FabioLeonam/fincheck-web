@@ -19,7 +19,8 @@ export function Accounts(){
     areValuesVisible,
     toggleValuesVisibility,
     isLoading,
-    accounts
+    accounts,
+    openNewAccountModal
   } = useAccountController();
   return (
     <div className="bg-teal-900 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
@@ -61,7 +62,10 @@ export function Accounts(){
 
                 <button
                   className="mt-4 h-52 border border-teal-600 rounded-2xl border-dashed flex flex-col
-                  items-center justify-center gap-4 text-white hover:bg-teal-950/5 transition-colors">
+                  items-center justify-center gap-4 text-white hover:bg-teal-950/5 transition-colors"
+                  onClick={openNewAccountModal}
+                  >
+
                   <div className="w-11 h-11 rounded-full border border-dashed border-white
                   flex items-center justify-center">
                     <PlusIcon className="w-6 h-6"/>
