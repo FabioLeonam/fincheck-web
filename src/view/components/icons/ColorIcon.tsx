@@ -1,9 +1,7 @@
-type Color = {
+interface ColorIconProps {
   color: string;
   bg: string;
-};
-
-
+}
 
 export function ColorIcon({ color, bg }: ColorIconProps) {
   return (
