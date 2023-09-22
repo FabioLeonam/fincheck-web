@@ -1,4 +1,5 @@
 import { Button } from "../../../../../components/Button";
+import { DatePickerInput } from "../../../../../components/DatePickerInput";
 import { Input } from "../../../../../components/Input";
 import { InputCurrency } from "../../../../../components/InputCurrency";
 import { Modal } from "../../../../../components/Modal";
@@ -71,6 +72,8 @@ export function NewTransactionModal(){
             }
           ]}
           />
+
+          <DatePickerInput />
         </div>
 
         <Button type="submit" className="w-full mt-6">
