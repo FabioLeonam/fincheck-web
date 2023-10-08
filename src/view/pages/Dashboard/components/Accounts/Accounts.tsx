@@ -22,6 +22,7 @@ export function Accounts(){
     accounts,
     openNewAccountModal
   } = useAccountController();
+
   return (
     <div className="bg-teal-900 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
       {isLoading && (
@@ -93,15 +94,17 @@ export function Accounts(){
                     </strong>
                     <SliderNavigation  isBeginning={sliderState.isBeginning} isEnd={sliderState.isEnd} />
                   </div>
-                    <SwiperSlide>
-                      <AccountCard color="#7950F2" name="Nubank" balance={1000.23} type="CHECKING"/>
+
+                  {accounts.map(account => (
+                     <SwiperSlide key={account.id}>
+                      <AccountCard
+                          color={account.color}
+                          name={account.name}
+                          balance={account.currentBalance}
+                          type={account.type}
+                        />
                     </SwiperSlide>
-                    <SwiperSlide>
-                      <AccountCard color="#333" name="XP Investimentos" balance={1000.23} type="INVESTMENT"/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <AccountCard color="#0f0" name="Carteira" balance={1000.23} type="CASH"/>
-                    </SwiperSlide>
+                  ))}
                 </Swiper>
             </div>
             )}
