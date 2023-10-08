@@ -20,7 +20,8 @@ export function Accounts(){
     toggleValuesVisibility,
     isLoading,
     accounts,
-    openNewAccountModal
+    openNewAccountModal,
+    currentBalance
   } = useAccountController();
 
   return (
@@ -40,7 +41,7 @@ export function Accounts(){
               "text-2xl tracking-[-1px] text-white",
               !areValuesVisible && 'blur-md'
             )}>
-              {formatCurrency(1000)}
+              {formatCurrency(currentBalance)}
             </strong>
 
             <button
