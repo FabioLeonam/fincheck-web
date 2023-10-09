@@ -1,4 +1,5 @@
 import { createContext, useCallback, useState } from "react";
+import { BankAccount } from "../../../../app/entities/BankAccount";
 
 interface DashboardContextValue {
   areValuesVisible: boolean,
@@ -11,6 +12,10 @@ interface DashboardContextValue {
   closeNewTransactionModal(): void;
   newTransactionType: "INCOME" | "EXPENSE" | null;
   setNewTransactionType(type: 'INCOME' | 'EXPENSE' | null): void;
+  isEditAccountModalOpen: boolean;
+  accountBeingEdited: null | BankAccount;
+  openEditAccountModal(bankAccount: BankAccount): void;
+  closeEditAccountModal(): void;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue)
@@ -22,6 +27,8 @@ export function DashboardProvider({ children }: { children: React.ReactNode}){
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
   const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null)
+  const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(false);
+  const [accountBeingEdited, setAccountBeingEdited] = useState<null | BankAccount>(null)
 
   const toggleValuesVisibility = useCallback(() => {
     setAreValuesVisible((prevState) => !prevState)
@@ -33,6 +40,16 @@ export function DashboardProvider({ children }: { children: React.ReactNode}){
 
   const closeNewAccountModal = useCallback(() => {
     setIsNewAccountModalOpen(false)
+  }, []);
+
+  const openEditAccountModal = useCallback((bankAccount: BankAccount) => {
+    setAccountBeingEdited(bankAccount)
+    setIsEditAccountModalOpen(true)
+  }, []);
+
+  const closeEditAccountModal = useCallback(() => {
+    setAccountBeingEdited(null)
+    setIsEditAccountModalOpen(false)
   }, []);
 
   const openNewTransactionModal = useCallback((type: 'INCOME' | 'EXPENSE') => {
@@ -57,7 +74,11 @@ export function DashboardProvider({ children }: { children: React.ReactNode}){
       openNewTransactionModal,
       closeNewTransactionModal,
       newTransactionType,
-      setNewTransactionType
+      setNewTransactionType,
+      openEditAccountModal,
+      closeEditAccountModal,
+      isEditAccountModalOpen,
+      accountBeingEdited,
     }}>
       {children}
     </DashboardContext.Provider>
