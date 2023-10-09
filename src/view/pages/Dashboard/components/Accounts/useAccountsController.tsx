@@ -10,7 +10,7 @@ export function useAccountController() {
   const {
     areValuesVisible,
     toggleValuesVisibility,
-    openNewAccountModal
+    openNewAccountModal,
   } = useDashboard();
 
   const [sliderState, setSliderState] = useState({
@@ -38,6 +38,6 @@ export function useAccountController() {
     isLoading: isFetching,
     accounts: data ?? [],
     openNewAccountModal,
-    currentBalance
+    currentBalance,
   }
 }
