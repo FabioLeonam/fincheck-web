@@ -16,8 +16,9 @@ export function EditAccountModal(){
     errors,
     handleSubmit,
     control,
-    isLoading
-  } = useEditAccountModalController()
+    isLoading,
+  } = useEditAccountModalController();
+
   return(
     <Modal
       title="Editar conta"
@@ -33,7 +34,7 @@ export function EditAccountModal(){
             <Controller
               name="initialBalance"
               control={control}
-              defaultValue="0"
+              defaultValue={0}
               render={({ field: { onChange, value } }) => (
                 <InputCurrency
                   error={errors.initialBalance?.message}
@@ -95,7 +96,7 @@ export function EditAccountModal(){
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          Salvar
         </Button>
       </form>
     </Modal>
