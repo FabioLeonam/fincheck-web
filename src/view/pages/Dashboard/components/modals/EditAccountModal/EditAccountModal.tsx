@@ -7,6 +7,7 @@ import { Modal } from "../../../../../components/Modal";
 import { Select } from "../../../../../components/Select";
 import { useEditAccountModalController } from "./useEditAccountModalController";
 import { TrashIcon } from "../../../../../components/icons/TrashIcon";
+import { ConfirmDeleteModal } from "../../../../../components/ConfirmDeleteModal";
 
 export function EditAccountModal(){
 
@@ -18,15 +19,33 @@ export function EditAccountModal(){
     handleSubmit,
     control,
     isLoading,
+    isDeleteModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDeleteAccount,
+    isLoadingDelete,
   } = useEditAccountModalController();
 
+  if(isDeleteModalOpen){
+    return (
+      <ConfirmDeleteModal
+        onClose={handleCloseDeleteModal}
+        title="Tem certeza que deseja excluir esta despesa?"
+        description="Ao excluir a conta, também serão excluídos todos os registros de receita e despesas relacionados."
+        onConfirm={handleDeleteAccount}
+        isLoading={isLoadingDelete}
+      />
+    )
+  }
   return(
     <Modal
       title="Editar conta"
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
       rightAction={(
-        <button>
+        <button
+          onClick={handleOpenDeleteModal}
+        >
           <TrashIcon className="w-6 h-6 text-red-900"/>
         </button>
       )}
@@ -41,13 +60,15 @@ export function EditAccountModal(){
               name="initialBalance"
               control={control}
               defaultValue={0}
-              render={({ field: { onChange, value } }) => (
-                <InputCurrency
-                  error={errors.initialBalance?.message}
-                  onChange={onChange}
-                  value={value}
-                />
-              )}
+              render={({ field: { onChange, value } }) => {
+                return(
+                  <InputCurrency
+                    error={errors.initialBalance?.message}
+                    onChange={onChange}
+                    value={value}
+                  />
+                )
+              }}
             />
           </div>
         </div>
