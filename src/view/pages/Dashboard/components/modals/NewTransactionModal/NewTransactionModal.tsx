@@ -17,7 +17,8 @@ export function NewTransactionModal(){
     errors,
     register,
     handleSubmit,
-    accounts
+    accounts,
+    categories
   } = useNewTransactionModalController()
 
   const isExpense = newTransactionType === 'EXPENSE'
@@ -66,20 +67,10 @@ export function NewTransactionModal(){
                 onChange={onChange}
                 value={value}
                 error={errors.categoryId?.message}
-                options={[
-                  {
-                    value: 'CHECKING',
-                    label: 'Conta corrente'
-                  },
-                  {
-                    value: 'INVESTMENT',
-                    label: 'Investimentos'
-                  },
-                  {
-                    value: 'CASH',
-                    label: 'Dinheiro físico'
-                  }
-                ]}
+                options={categories.map((category) => ({
+                  value: category.id,
+                  label: category.name
+                }))}
               />
             )}
           />
@@ -105,8 +96,10 @@ export function NewTransactionModal(){
           <Controller
             control={control}
             name="date"
+            defaultValue={new Date()}
             render={({ field: { onChange, value }}) => (
               <DatePickerInput
+                error={errors.date?.message}
                 onChange={onChange}
                 value={value}
               />
