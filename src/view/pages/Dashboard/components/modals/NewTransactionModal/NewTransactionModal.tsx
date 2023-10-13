@@ -18,7 +18,8 @@ export function NewTransactionModal(){
     register,
     handleSubmit,
     accounts,
-    categories
+    categories,
+    isLoading,
   } = useNewTransactionModalController()
 
   const isExpense = newTransactionType === 'EXPENSE'
@@ -107,7 +108,11 @@ export function NewTransactionModal(){
           />
         </div>
 
-        <Button type="submit" className="w-full mt-6">
+        <Button
+          type="submit"
+          className="w-full mt-6"
+          isLoading={isLoading}
+        >
           Criar
         </Button>
       </form>
