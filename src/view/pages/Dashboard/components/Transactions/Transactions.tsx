@@ -21,7 +21,9 @@ export function Transactions(){
     transactions,
     isFiltersModalOpen,
     handleCloseFiltersModal,
-    handleOpenFiltersModal
+    handleOpenFiltersModal,
+    handleChangeFilters,
+    filters
   } = useTransactionController();
 
   const hasTransactions = transactions.length > 0;
@@ -40,7 +42,10 @@ export function Transactions(){
         <FiltersModal open={isFiltersModalOpen} onClose={handleCloseFiltersModal}/>
         <header>
           <div className="flex items-center justify-between">
-            <TransactionTypeDropdown />
+            <TransactionTypeDropdown
+              onSelect={handleChangeFilters('type')}
+              selectedType={filters.type}
+            />
 
             <button onClick={handleOpenFiltersModal}>
               <FilterIcon />
@@ -51,6 +56,10 @@ export function Transactions(){
             <Swiper
               slidesPerView={3}
               centeredSlides
+              onSlideChange={(swiper) => {
+                handleChangeFilters('month')(swiper.realIndex)
+              }}
+              initialSlide={filters.month}
             >
               <SliderNavigation />
               {MONTHS.map((month, index) => (
