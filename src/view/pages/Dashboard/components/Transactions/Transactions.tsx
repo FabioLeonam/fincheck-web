@@ -12,6 +12,7 @@ import emptyStateImage from '../../../../../assets/empty-state.svg';
 import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
 import { FiltersModal } from "./FiltersModal/FiltersModal";
 import { formatDate } from "../../../../../app/utils/formatDate";
+import { EditTransactionModal } from "../modals/EditTransactionModal/EditTransactionModal";
 
 export function Transactions(){
   const {
@@ -23,7 +24,12 @@ export function Transactions(){
     handleCloseFiltersModal,
     handleOpenFiltersModal,
     handleChangeFilters,
-    filters
+    filters,
+    handleApplyFilters,
+    handleCloseEditTransactionModal,
+    handleOpenEditTransactionModal,
+    isEditModalOpen,
+    transactionBeingEdited
   } = useTransactionController();
 
   const hasTransactions = transactions.length > 0;
@@ -39,7 +45,11 @@ export function Transactions(){
 
      {!isInitialLoading && (
       <>
-        <FiltersModal open={isFiltersModalOpen} onClose={handleCloseFiltersModal}/>
+        <FiltersModal
+          open={isFiltersModalOpen}
+          onClose={handleCloseFiltersModal}
+          onApplyFilters={handleApplyFilters}
+        />
         <header>
           <div className="flex items-center justify-between">
             <TransactionTypeDropdown
@@ -87,10 +97,21 @@ export function Transactions(){
             </div>
           )}
 
-          {(hasTransactions && !isLoading ) && transactions.map((transaction) => (
+          {(hasTransactions && !isLoading ) && (
+            <>
+              {transactionBeingEdited && (
+                <EditTransactionModal
+                open={isEditModalOpen}
+                transaction={transactionBeingEdited}
+                onClose={handleCloseEditTransactionModal}
+              />
+              )}
+              {transactions.map((transaction) => (
                 <div
                   key={transaction.id}
                   className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4"
+                  role="button"
+                  onClick={() => handleOpenEditTransactionModal(transaction)}
                 >
                   <div className="flex-1 flex items-center gap-3">
                     <CategoryIcon
@@ -114,7 +135,9 @@ export function Transactions(){
 
                   </span>
                 </div>
-              ))
+              ))}
+            </>
+          )
           }
         </div>
       </>
